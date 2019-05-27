@@ -14,7 +14,7 @@ describe("gameGenerator", () => {
     const game = gameGenerator(bound);
     const number = [];
     for (let i = 0; i < bound; i++) {
-      if (game.guess(i)) {
+      if (game.guess(i).status === true) {
         number.push(i);
       }
     }
@@ -31,32 +31,45 @@ describe("gameGenerator", () => {
         number.push(i);
       }
     }
-    const reset = game.reset;
-    expect(reset).toBeTruthy(bound);
+    game.reset();
+    result = game.result;
+    let joc = jasmine.objectContaining;
+    expect(result).toEqual(joc({ won: 0, lost: 0}));
   });
 
   //own test
   it("should have a giveUp method", () => {
-    expect(false).toBeTruthy();
+    const bound = 4;
+    const game = gameGenerator(bound);
+    const giveUp = game.giveUp();
+    let joc = jasmine.objectContaining;
+    expect(giveUp).toEqual(joc({message: 'Oh, Yusha yo, shinde shimautowa, nasakenai!'}));
   });
 
-  it("should have a numGuesses method", () => {
-    expect(false).toBeTruthy();
+  it("should have a hint method", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    const number = [];
+    for (let i = 0; i < bound; i++) {
+      if (game.guess(i).status === false) {
+        number.push(game.hints);
+      }
+    }
+    expect(number.length).not.toBe(0);
   });
 
   it("should keep tracking of guesses have been made", () => {
-    expect(false).toBeTruthy();
-  });
-
-  it("should take number and pass to upper bound", () => {
-    expect(false).toBeTruthy();
+    const bound = 10;
+    const game = gameGenerator(bound);
+    game.guess(1);
+    expect(game.played).not.toBe(0);
   });
 
   it("should be false if the number is not between 0 and upper bound", () => {
-    expect(false).toBeTruthy();
-});
-
-  
+    const bound = 4;
+    const game = gameGenerator(bound);
+    expect(game.guess(10).status).not.toBeTruthy();
+  });
 });
 
 describe("accountGenerator", () => {
