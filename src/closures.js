@@ -127,13 +127,7 @@ function accountGenerator(initial) {
         detail.after = balance;
         detail.status = "approved";
         history.push(detail);
-        return {
-          type: "withdraw",
-          amount: amount,
-          before: beforeWithdraw,
-          after: balance,
-          status: "approved",
-        }
+        return detail;
       } else if(balance - amount < 0){
         let detail = {};
         detail.type = "error";
@@ -141,12 +135,7 @@ function accountGenerator(initial) {
         detail.balance = balance;
         detail.status = "denied";
         history.push(detail);
-        return {
-          type: "error",
-          balance: balance,
-          message: `Insufficient funds, your balance is $${beforeWithdraw}.`,
-          status: "denied"
-        }
+        return detail;
       }
     },
     deposit: function(amount) {
@@ -159,16 +148,10 @@ function accountGenerator(initial) {
         detail.after = balance;
         detail.status = "approved";
         history.push(detail);
-      return {
-        type: "deposit",
-        amount: amount,
-        before: beforeDeposit,
-        after: balance,
-        status: "approved"
-      };
+      return detail;
     },
     transactionHistory: function() {
-      return history;
+      return history.pop();
     }
   };
 }
