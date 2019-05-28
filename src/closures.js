@@ -118,8 +118,7 @@ function accountGenerator(initial) {
   };
 
   function transactionHistory(last) {
-    history = history.slice(last);
-    return history;
+    return history.slice(last);
   };
 
   function withdraw(amount) {
