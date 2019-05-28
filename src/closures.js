@@ -118,13 +118,7 @@ function accountGenerator(initial) {
   };
 
   function transactionHistory(last) {
-    let newHistory = [];
-    if(last >= history.length){
-      newHistory = history.slice(history.length-1);
-    } else {
-      newHistory = history.slice(-last);
-    }
-    return newHistory;
+    return history.slice(-last);
   };
 
   function withdraw(amount) {
@@ -142,7 +136,7 @@ function accountGenerator(initial) {
       return detail;
     } else if(balance - amount < 0){
       let detail = {};
-      detail.type = "error";
+      detail.type = "withdrawal";
       detail.amount = amount;
       detail.balance = balance;
       detail.status = "denied";
