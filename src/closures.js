@@ -16,6 +16,7 @@ function gameGenerator(n) {
   let life = n
   
   function guessThisNumber(val) {
+    games.played = numberGuesses(1);
     //Lose
     if(games.life - games.played === 0){
       games.played = 0;
@@ -39,7 +40,6 @@ function gameGenerator(n) {
       games.status = true;
       return true;
     } else if(val !== answer){
-        games.played = numberGuesses(1);
         games.status = false;
         games.hint = hint();
        return false;
@@ -143,6 +143,7 @@ function accountGenerator(initial) {
       history.push(detail);
       return detail;
     }
+    return detail;
   };
 
   function deposit(amount) {
