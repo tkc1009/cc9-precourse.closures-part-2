@@ -13,7 +13,7 @@ function gameGenerator(n) {
   const upperBound = n;
   let games = {};
   let answer = randomInteger(n-1);
-  let life = n
+  let life = n+1;
   
   function guessThisNumber(val) {
     games.played = numberGuesses(1);
@@ -36,7 +36,6 @@ function gameGenerator(n) {
     if (val === answer) {
       games.result.won ++;
       games.played = 0;
-      changeAnswer();
       games.status = true;
       return true;
     } else if(val !== answer){
@@ -49,14 +48,14 @@ function gameGenerator(n) {
   //change answer
   function changeAnswer() {
     answer = randomInteger(Math.floor(Math.random() * upperBound));
-    return answer;
+    return "game reset";
   };
 
   //reset
   function reset() {
     let oldAnswer = answer;
     changeAnswer();
-    return oldAnswer;
+    return 'Answer changed';
   };
 
   //increase guess
@@ -103,6 +102,7 @@ function gameGenerator(n) {
   games.status = false;
   games.answer = answer;
   games.numberGuesses = numberGuesses;
+  games.hint = hint;
 
   return games;
 }
@@ -112,19 +112,19 @@ function gameGenerator(n) {
 function accountGenerator(initial) {
   let balance = initial;
   let history = [];
-  let detail = {};
 
   function getBalance() {
     return balance;
   };
 
-  function transactionHistory(last) {
-    return history.slice(last);
+  function transactionHistory() {
+    return history;
   };
 
   function withdraw(amount) {
     let beforeWithdraw = balance;
     if (balance - amount >= 0) {
+      let detail = {};
       balance = balance - amount;
       detail.type = "withdrawal";
       detail.amount = amount;
@@ -135,6 +135,7 @@ function accountGenerator(initial) {
       history.push(detail);
       return detail;
     } else if(balance - amount < 0){
+      let detail = {};
       detail.type = "error";
       detail.amount = amount;
       detail.balance = balance;
@@ -146,6 +147,7 @@ function accountGenerator(initial) {
   };
 
   function deposit(amount) {
+    let detail = {};
     let beforeDeposit = balance;
     balance = balance + amount;
       detail.type = "deposit";
@@ -160,7 +162,23 @@ function accountGenerator(initial) {
 
   function averageTransaction() {
     let numberOfHistories = transactionHistory();
-    return 
+    let deposit = 0;
+    let depoCount = 0;
+    let withdraw = 0;
+    let withdrawCount = 0;
+    const depoAmount = (arr) => {
+      for(let i = 0; i < arr.length; i++){
+        if(arr[i].type === "deposit" && arr[i].status === "approved"){
+          deposit += arr[i].amount;
+          depoCount += 1;
+        } else if(arr[i].type === "withdrawal" && arr[i].status === "approved"){
+          withdraw += arr[i].amount;
+          withdrawCount += 1;
+        }
+      }
+      return { deposit: deposit/depoCount, withdraw: withdraw/withdrawCount };
+    }
+    return depoAmount(numberOfHistories);
   }
     
   return {

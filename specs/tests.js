@@ -14,7 +14,7 @@ describe("gameGenerator", () => {
     const game = gameGenerator(bound);
     const number = [];
     for (let i = 0; i < bound; i++) {
-      if (game.guess(i).status === true) {
+      if (game.guess(i)) {
         number.push(i);
       }
     }
@@ -25,16 +25,9 @@ describe("gameGenerator", () => {
     // How do you test for this?
     const bound = 4;
     const game = gameGenerator(bound);
-    const number = [];
-    for (let i = 0; i < bound; i++) {
-      if (game.guess(i)) {
-        number.push(i);
-      }
-    }
-    game.reset();
-    result = game.result;
-    let joc = jasmine.objectContaining;
-    expect(result).toEqual(joc({ won: 0, lost: 0}));
+    game.guess(1);
+    let actual = game.reset();
+    expect(actual).toEqual("Answer changed");
   });
 
   //own test
@@ -42,20 +35,14 @@ describe("gameGenerator", () => {
     const bound = 4;
     const game = gameGenerator(bound);
     const giveUp = game.giveUp();
-    let joc = jasmine.objectContaining;
-    expect(giveUp).toEqual(joc({message: 'Oh, Yusha yo, shinde shimautowa, nasakenai!'}));
+    expect(giveUp).toEqual(game.answer);
   });
 
   it("should have a hint method", () => {
     const bound = 4;
     const game = gameGenerator(bound);
-    const number = [];
-    for (let i = 0; i < bound; i++) {
-      if (game.guess(i).status === false) {
-        number.push(game.hints);
-      }
-    }
-    expect(number.length).not.toBe(0);
+    const hint = game.hint();
+    expect(typeof hint).toBe("string");
   });
 
   it("should keep tracking of guesses have been made", () => {
@@ -102,7 +89,7 @@ describe("accountGenerator", () => {
     const deposit = account.deposit;
     withdraw(1000);
     deposit(3000);
-    const history = account.history();
+    const history = account.transactionHistory();
     expect(history.length).toEqual(2);
   });
 });
@@ -118,7 +105,7 @@ describe("withdraw function", () => {
     const account = accountGenerator(10000);
     const withdraw = account.withdraw(1000);
     const actual = Object.keys(withdraw).sort();
-    const expected = ["type","amount","before","after","status"].sort();
+    const expected = ["type","amount","before","after","status","time"].sort();
     expect(actual).toEqual(expected)
   });
 });
@@ -134,7 +121,7 @@ describe("deposit function", () => {
     const account = accountGenerator(10000);
     const deposit = account.deposit(1000);
     const actual = Object.keys(deposit).sort();
-    const expected = ["type","amount","before","after","status"].sort();
+    const expected = ["type","amount","before","after","status","time"].sort();
     expect(actual).toEqual(expected)
   });
 });
