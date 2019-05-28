@@ -122,7 +122,7 @@ function accountGenerator(initial) {
     if(last >= history.length){
       newHistory = history.slice(history.length-1);
     } else {
-      newHistory = history.slice(last);
+      newHistory = history.slice(-last);
     }
     return newHistory;
   };
@@ -137,7 +137,7 @@ function accountGenerator(initial) {
       detail.before = beforeWithdraw;
       detail.after = balance;
       detail.status = "approved";
-      detail.time = Date();
+      detail.time = new Date();
       history.push(detail);
       return detail;
     } else if(balance - amount < 0){
@@ -160,7 +160,7 @@ function accountGenerator(initial) {
       detail.before = beforeDeposit;
       detail.after = balance;
       detail.status = "approved";
-      detail.time = Date();
+      detail.time = new Date();
       history.push(detail);
     return detail;
   };
