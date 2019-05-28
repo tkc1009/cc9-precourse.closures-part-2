@@ -53,7 +53,6 @@ function gameGenerator(n) {
 
   //reset
   function reset() {
-    let oldAnswer = answer;
     changeAnswer();
     return 'Answer changed';
   };
@@ -108,6 +107,7 @@ function gameGenerator(n) {
 }
 
 
+//accontGenerator
 
 function accountGenerator(initial) {
   let balance = initial;
@@ -143,7 +143,6 @@ function accountGenerator(initial) {
       history.push(detail);
       return detail;
     }
-    return detail;
   };
 
   function deposit(amount) {
