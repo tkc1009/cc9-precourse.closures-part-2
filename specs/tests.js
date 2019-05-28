@@ -78,7 +78,47 @@ describe("accountGenerator", () => {
     expect(typeof accountGenerator).toBe("function");
   });
 
-  it("should have some tests", () => {
-    expect(false).toBeTruthy();
+  it("should withdraw money from account", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw;
+    expect(withdraw(1000)).toBe("Here’s your money: $1000");
+  });
+
+  it("should deposit money into account", () => {
+    const account = accountGenerator(10000);
+    const deposit = account.deposit;
+    expect(deposit(1000)).toBe(`Your balance is: $11000`);
+  });
+});
+
+describe("withdraw function", () => {
+  it("should return object", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw(1000);
+    expect(typeof withdraw).toBe('object');
+  });
+
+  it("should contains all keys", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw(1000);
+    const actual = Object.keys(withdraw).sort();
+    const expected = ["type","amount","before","after","status"].sort();
+    expect(actual).toBe(expected)
+  });
+});
+
+describe("deposit function", () => {
+  it("should return object", () => {
+    const account = accountGenerator(10000);
+    const deposit = account.deposit(1000);
+    expect(typeof deposit).toBe('object');
+  });
+
+  it("should contains all keys", () => {
+    const account = accountGenerator(10000);
+    const deposit = account.deposit(1000);
+    const actual = Object.keys(deposit).sort();
+    const expected = ["type","amount","before","after","status"].sort();
+    expect(actual).toBe(expected)
   });
 });
