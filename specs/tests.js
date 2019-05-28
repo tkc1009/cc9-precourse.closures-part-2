@@ -89,6 +89,22 @@ describe("accountGenerator", () => {
     const deposit = account.deposit;
     expect(deposit(1000).after).toBe(11000);
   });
+
+  it("should deny if withdraw money exceed balance", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw;
+    expect(withdraw(12000).status).toBe("denied");
+  });
+
+  it("should return history", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw;
+    const deposit = account.deposit;
+    withdraw(1000);
+    deposit(3000);
+    const history = account.history();
+    expect(history.length).toEqual(2);
+  });
 });
 
 describe("withdraw function", () => {
