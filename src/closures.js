@@ -138,7 +138,8 @@ function accountGenerator(initial) {
       let detail = {};
       detail.type = "withdrawal";
       detail.amount = amount;
-      detail.balance = balance;
+      detail.before = beforeWithdraw;
+      detail.after = balance;
       detail.status = "denied";
       history.push(detail);
       return detail;
