@@ -81,13 +81,13 @@ describe("accountGenerator", () => {
   it("should withdraw money from account", () => {
     const account = accountGenerator(10000);
     const withdraw = account.withdraw;
-    expect(withdraw(1000)).toBe("Here’s your money: $1000");
+    expect(withdraw(1000).after).toBe(9000);
   });
 
   it("should deposit money into account", () => {
     const account = accountGenerator(10000);
     const deposit = account.deposit;
-    expect(deposit(1000)).toBe(`Your balance is: $11000`);
+    expect(deposit(1000).after).toBe(11000);
   });
 });
 
@@ -103,7 +103,7 @@ describe("withdraw function", () => {
     const withdraw = account.withdraw(1000);
     const actual = Object.keys(withdraw).sort();
     const expected = ["type","amount","before","after","status"].sort();
-    expect(actual).toBe(expected)
+    expect(actual).toEqual(expected)
   });
 });
 
@@ -119,6 +119,6 @@ describe("deposit function", () => {
     const deposit = account.deposit(1000);
     const actual = Object.keys(deposit).sort();
     const expected = ["type","amount","before","after","status"].sort();
-    expect(actual).toBe(expected)
+    expect(actual).toEqual(expected)
   });
 });
