@@ -112,47 +112,56 @@ function gameGenerator(n) {
 function accountGenerator(initial) {
   let balance = initial;
   let history = [];
+  let detail = {};
+
+  function getBalance() {
+    return balance;
+  };
+
+  function transactionHistory(last) {
+    return history.slice(last);
+  };
+
+  function withdraw(amount) {
+    let beforeWithdraw = balance;
+    if (balance - amount >= 0) {
+      balance = balance - amount;
+      let detail = {};
+      detail.type = "withdrawal";
+      detail.amount = amount;
+      detail.before = beforeWithdraw;
+      detail.after = balance;
+      detail.status = "approved";
+      history.push(detail);
+      return detail;
+    } else if(balance - amount < 0){
+      let detail = {};
+      detail.type = "error";
+      detail.amount = amount;
+      detail.balance = balance;
+      detail.status = "denied";
+      history.push(detail);
+      return detail;
+    }
+  };
+
+  function deposit(amount) {
+    let beforeDeposit = balance;
+    balance = balance + amount;
+    let detail = {};
+      detail.type = "deposit";
+      detail.amount = amount;
+      detail.before = beforeDeposit;
+      detail.after = balance;
+      detail.status = "approved";
+      history.push(detail);
+    return detail;
+  }
     
   return {
-    getBalance: function() {
-      return balance;
-    },
-    withdraw: function(amount) {
-      let beforeWithdraw = balance;
-      if (balance - amount >= 0) {
-        balance = balance - amount;
-        let detail = {};
-        detail.type = "withdrawal";
-        detail.amount = amount;
-        detail.before = beforeWithdraw;
-        detail.after = balance;
-        detail.status = "approved";
-        history.push(detail);
-        return detail;
-      } else if(balance - amount < 0){
-        let detail = {};
-        detail.type = "error";
-        detail.amount = amount;
-        detail.balance = balance;
-        detail.status = "denied";
-        history.push(detail);
-        return detail;
-      }
-    },
-    deposit: function(amount) {
-      let beforeDeposit = balance;
-      balance = balance + amount;
-      let detail = {};
-        detail.type = "deposit";
-        detail.amount = amount;
-        detail.before = beforeDeposit;
-        detail.after = balance;
-        detail.status = "approved";
-        history.push(detail);
-      return detail;
-    },
-    transactionHistory: function(last) {
-      return history.slice(last);
-    }
+    balance: getBalance,
+    withdraw: withdraw,
+    deposit: deposit,
+    transactionHistory: transactionHistory,
   };
 }
