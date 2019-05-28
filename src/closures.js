@@ -131,7 +131,7 @@ function accountGenerator(initial) {
       detail.before = beforeWithdraw;
       detail.after = balance;
       detail.status = "approved";
-      detail.time = Date();
+      // detail.time = Date();
       history.push(detail);
       return detail;
     } else if(balance - amount < 0){
@@ -154,7 +154,7 @@ function accountGenerator(initial) {
       detail.before = beforeDeposit;
       detail.after = balance;
       detail.status = "approved";
-      detail.time = Date();
+      // detail.time = Date();
       history.push(detail);
     return detail;
   };
