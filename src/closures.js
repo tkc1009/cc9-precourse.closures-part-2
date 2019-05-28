@@ -126,16 +126,15 @@ function accountGenerator(initial) {
     let beforeWithdraw = balance;
     if (balance - amount >= 0) {
       balance = balance - amount;
-      let detail = {};
       detail.type = "withdrawal";
       detail.amount = amount;
       detail.before = beforeWithdraw;
       detail.after = balance;
       detail.status = "approved";
+      detail.time = Date();
       history.push(detail);
       return detail;
     } else if(balance - amount < 0){
-      let detail = {};
       detail.type = "error";
       detail.amount = amount;
       detail.balance = balance;
@@ -149,14 +148,19 @@ function accountGenerator(initial) {
   function deposit(amount) {
     let beforeDeposit = balance;
     balance = balance + amount;
-    let detail = {};
       detail.type = "deposit";
       detail.amount = amount;
       detail.before = beforeDeposit;
       detail.after = balance;
       detail.status = "approved";
+      detail.time = Date();
       history.push(detail);
     return detail;
+  };
+
+  function averageTransaction() {
+    let numberOfHistories = transactionHistory();
+    return 
   }
     
   return {
@@ -164,5 +168,6 @@ function accountGenerator(initial) {
     withdraw: withdraw,
     deposit: deposit,
     transactionHistory: transactionHistory,
+    averageTransaction: averageTransaction,
   };
 }
