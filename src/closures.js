@@ -117,7 +117,8 @@ function accountGenerator(initial) {
     return balance;
   };
 
-  function transactionHistory() {
+  function transactionHistory(last) {
+    history = history.slice(last);
     return history;
   };
 
