@@ -40,20 +40,11 @@ function gameGenerator(n) {
       games.played = 0;
       changeAnswer();
       games.status = true;
-      return {
-        message: "You win!",
-        result: games.result,
-        status: true,
-      };
+      return true;
     } else if(val !== answer){
-        games.played ++;
+        games.played = numberGuesses;
         games.status = false;
-       return {
-        message: `No... Please try a number again.`,
-        life: games.life - games.played,
-        hints: hint(val),
-        status: false,
-      };
+       return false;
     }
   }
 
@@ -61,14 +52,19 @@ function gameGenerator(n) {
   function changeAnswer() {
     answer = randomInteger(Math.floor(Math.random() * upperBound));
     return answer;
-  }
+  };
 
   //reset
   function reset() {
-    this.result = { won: 0, lost: 0 };
-    this.played = 0;
+    let oldAnswer = answer;
     changeAnswer();
-    return { message: `Oh, Yushayo, yokuzo modottekite kureta!`}
+    return oldAnswer;
+  };
+
+  //increase guess
+  function numberGuesses() {
+    games.played += 1;
+    return games.played;
   }
 
   //hint message creator
