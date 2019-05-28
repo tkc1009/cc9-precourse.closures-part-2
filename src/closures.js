@@ -141,6 +141,7 @@ function accountGenerator(initial) {
       detail.before = beforeWithdraw;
       detail.after = balance;
       detail.status = "denied";
+      detail.time = new Date();
       history.push(detail);
       return detail;
     }
