@@ -160,7 +160,7 @@ function accountGenerator(initial) {
   }
     
   return {
-    balance: getBalance,
+    getBalance: getBalance,
     withdraw: withdraw,
     deposit: deposit,
     transactionHistory: transactionHistory,
