@@ -28,10 +28,7 @@ function gameGenerator(n) {
     }
     //input value check
     if(val > upperBound ||typeof val !== "number"){
-      return { 
-        message: `Wrong input, please try a number between 0 and ${upperBound}`,
-        status : false
-      };
+      return true;
     }
 
     //Win or Wrong
@@ -42,8 +39,9 @@ function gameGenerator(n) {
       games.status = true;
       return true;
     } else if(val !== answer){
-        games.played = numberGuesses;
+        games.played = numberGuesses(1);
         games.status = false;
+        games.hint = hint();
        return false;
     }
   }
@@ -62,8 +60,15 @@ function gameGenerator(n) {
   };
 
   //increase guess
-  function numberGuesses() {
-    games.played += 1;
+  function numberGuesses(n) {
+    if(n === undefined){
+      return games.played
+    };
+    if(n === 0){
+      games.played = 0;
+    } else {
+      games.played += 1;
+    }
     return games.played;
   }
 
@@ -82,11 +87,10 @@ function gameGenerator(n) {
   function giveUp(){
     this.played = 0;
     this.result.lost ++;
+    let oldAnswer = answer;
+    numberGuesses(0);
     changeAnswer();
-    return { 
-      message: 'Oh, Yusha yo, shinde shimautowa, nasakenai!',
-      result: games.result,
-    }
+    return oldAnswer;
   }
 
   //object inside
@@ -98,6 +102,7 @@ function gameGenerator(n) {
   games.result = { won: 0, lost: 0 };
   games.status = false;
   games.answer = answer;
+  games.numberGuesses = numberGuesses;
 
   return games;
 }
