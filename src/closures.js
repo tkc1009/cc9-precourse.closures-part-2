@@ -111,7 +111,11 @@ function gameGenerator(n) {
 function accountGenerator(initial) {
   let balance = initial;
   let history = [];
+    
   return {
+    getBalance: function() {
+      return balance;
+    },
     withdraw: function(amount) {
       let beforeWithdraw = balance;
       if (balance - amount >= 0) {
@@ -163,7 +167,7 @@ function accountGenerator(initial) {
         status: "approved"
       };
     },
-    history: function() {
+    transactionHistory: function() {
       return history;
     }
   };
