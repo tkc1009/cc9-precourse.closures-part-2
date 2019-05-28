@@ -121,7 +121,7 @@ function accountGenerator(initial) {
       if (balance - amount >= 0) {
         balance = balance - amount;
         let detail = {};
-        detail.type = "withdraw";
+        detail.type = "withdrawal";
         detail.amount = amount;
         detail.before = beforeWithdraw;
         detail.after = balance;
@@ -150,8 +150,8 @@ function accountGenerator(initial) {
         history.push(detail);
       return detail;
     },
-    transactionHistory: function() {
-      return history.pop();
+    transactionHistory: function(last) {
+      return history.slice(last);
     }
   };
 }
