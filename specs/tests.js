@@ -23,11 +23,39 @@ describe("gameGenerator", () => {
 
   it("should have a reset method", () => {
     // How do you test for this?
-    expect(false).toBeTruthy();
+    const bound = 4;
+    const game = gameGenerator(bound);
+    game.guess(1);
+    let actual = game.reset();
+    expect(actual).toEqual("Answer changed");
   });
 
-  it("create your own test", () => {
-    expect(false).toBeTruthy();
+  //own test
+  it("should have a giveUp method", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    const giveUp = game.giveUp();
+    expect(giveUp).toEqual(game.answer);
+  });
+
+  it("should have a hint method", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    const hint = game.hint();
+    expect(typeof hint).toBe("string");
+  });
+
+  it("should keep tracking of guesses have been made", () => {
+    const bound = 10;
+    const game = gameGenerator(bound);
+    game.guess(1);
+    expect(game.played).not.toBe(0);
+  });
+
+  it("should be false if the number is not between 0 and upper bound", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    expect(game.guess(10).status).not.toBeTruthy();
   });
 });
 
@@ -37,7 +65,63 @@ describe("accountGenerator", () => {
     expect(typeof accountGenerator).toBe("function");
   });
 
-  it("should have some tests", () => {
-    expect(false).toBeTruthy();
+  it("should withdraw money from account", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw;
+    expect(withdraw(1000).after).toBe(9000);
+  });
+
+  it("should deposit money into account", () => {
+    const account = accountGenerator(10000);
+    const deposit = account.deposit;
+    expect(deposit(1000).after).toBe(11000);
+  });
+
+  it("should deny if withdraw money exceed balance", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw;
+    expect(withdraw(12000).status).toBe("denied");
+  });
+
+  it("should return history", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw;
+    const deposit = account.deposit;
+    withdraw(1000);
+    deposit(3000);
+    const history = account.transactionHistory();
+    expect(history.length).toEqual(2);
+  });
+});
+
+describe("withdraw function", () => {
+  it("should return object", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw(1000);
+    expect(typeof withdraw).toBe('object');
+  });
+
+  it("should contains all keys", () => {
+    const account = accountGenerator(10000);
+    const withdraw = account.withdraw(1000);
+    const actual = Object.keys(withdraw).sort();
+    const expected = ["type","amount","before","after","status","time"].sort();
+    expect(actual).toEqual(expected)
+  });
+});
+
+describe("deposit function", () => {
+  it("should return object", () => {
+    const account = accountGenerator(10000);
+    const deposit = account.deposit(1000);
+    expect(typeof deposit).toBe('object');
+  });
+
+  it("should contains all keys", () => {
+    const account = accountGenerator(10000);
+    const deposit = account.deposit(1000);
+    const actual = Object.keys(deposit).sort();
+    const expected = ["type","amount","before","after","status","time"].sort();
+    expect(actual).toEqual(expected)
   });
 });
