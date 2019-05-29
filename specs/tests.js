@@ -23,12 +23,43 @@ describe("gameGenerator", () => {
 
   it("should have a reset method", () => {
     // How do you test for this?
-    expect(false).toBeTruthy();
+    const game = gameGenerator(4);
+    expect(game.guess).toBeDefined();
   });
 
-  it("create your own test", () => {
-    expect(false).toBeTruthy();
+  it("should have a giveUp method", () => {
+    const game = gameGenerator(4);
+    expect(game.guess).toBeDefined();
   });
+
+  it("giveUp method should return correct number and reset", () => {
+    const bound = 10;
+    const game = gameGenerator(bound);
+    const number = [];
+    for (let i = 0; i < bound; i++) {
+      if (game.guess(i)) {
+        number.push(i);
+      }
+    }
+    expect(number.length).toBe(1);
+    expect(number[0]).toBe(game.giveUp());
+  });
+
+  it("should have a numGuesses method", () => {
+    const game = gameGenerator(4);
+    expect(game.numGuesses).toBeDefined();
+  });
+
+  it("numGuesses method should return totalGuesses properly", () => {
+    const game = gameGenerator(4);
+    for(var i=0; i<3; i++){
+      game.guess(i);
+    }
+    expect(game.numGuesses()).toBe(3);
+    game.reset();
+    expect(game.numGuesses()).toBe(0);
+  });
+
 });
 
 describe("accountGenerator", () => {

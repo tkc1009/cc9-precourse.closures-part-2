@@ -8,7 +8,37 @@ function randomInteger(n) {
   return Math.floor(Math.random() * (n + 1));
 }
 
-function gameGenerator() {}
+function gameGenerator(upperBound) {
+  let secretNumber = randomInteger(upperBound || 10);
+  let totalGuesses = 0;
+
+  const guess = (n) => {
+    totalGuesses++;
+    if(n === secretNumber)
+      return true;
+    else
+      return false;
+  };
+  const reset = () => {
+    secretNumber = randomInteger(upperBound);
+    totalGuesses = 0;
+  };
+
+  const giveUp = () => {
+    let result = secretNumber;
+    reset();
+    return result;
+  };
+
+  const numGuesses = () => totalGuesses;
+
+  return {
+    'guess': guess,
+    'reset': reset,
+    'giveUp': giveUp,
+    'numGuesses': numGuesses
+  };
+}
 
 function accountGenerator(initial) {
   let balance = initial;
