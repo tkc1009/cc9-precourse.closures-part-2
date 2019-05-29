@@ -36,7 +36,7 @@ function gameGenerator(upperBound) {
     'guess': guess,
     'reset': reset,
     'giveUp': giveUp,
-    'numGuesses': numGuesses
+    'numberGuesses': numGuesses
   };
 }
 function accountGenerator(initial) {

@@ -44,19 +44,19 @@ describe("gameGenerator", () => {
     expect(number[0]).toBe(game.giveUp());
   });
 
-  it("should have a numGuesses method", () => {
+  it("should have a numberGuesses method", () => {
     const game = gameGenerator(4);
-    expect(game.numGuesses).toBeDefined();
+    expect(game.numberGuesses).toBeDefined();
   });
 
-  it("numGuesses method should return totalGuesses properly", () => {
+  it("numberGuesses method should return totalGuesses properly", () => {
     const game = gameGenerator(4);
     for(var i=0; i<3; i++){
       game.guess(i);
     }
-    expect(game.numGuesses()).toBe(3);
+    expect(game.numberGuesses()).toBe(3);
     game.reset();
-    expect(game.numGuesses()).toBe(0);
+    expect(game.numberGuesses()).toBe(0);
   });
 
 });
