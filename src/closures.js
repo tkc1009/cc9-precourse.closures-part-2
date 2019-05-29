@@ -96,7 +96,14 @@ function accountGenerator(initial) {
 
   const getBalance = () => balance;
 
-  const transactionHistory = () => transactions;
+  const transactionHistory = (n) => {
+    if(n && typeof n !== 'number')
+      return;
+    else if(!n || n >= transactions.length)
+      return transactions.slice();
+    else
+      return transactions.slice(0,n);
+  }
 
   const averageTransaction = () => {
     const result = {

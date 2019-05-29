@@ -124,6 +124,9 @@ describe("accountGenerator", () => {
     expect(account.transactionHistory(2).length).toBe(0);
     account.deposit(1000);
     account.deposit(1000);
+    account.deposit(1000);
+    account.deposit(1000);
+    expect(account.transactionHistory().length).toBe(4);
     expect(account.transactionHistory(2).length).toBe(2);
   });
 
