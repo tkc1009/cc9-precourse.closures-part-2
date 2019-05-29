@@ -39,21 +39,68 @@ function gameGenerator(upperBound) {
     'numGuesses': numGuesses
   };
 }
-
 function accountGenerator(initial) {
   let balance = initial;
+  const transactions = [];
 
-  return {
-    withdraw: function(amount) {
+  STATUS = {
+    APPROVED: 'approved',
+    DENIED: 'denied'
+  };
+
+  TYPE = {
+    DEPOSIT: 'deposit',
+    WITHDRAW: 'withdrawal'
+  };
+
+  const processTransaction = (type, amount) => {
+    var result = {
+      'type': type,
+      'amount': amount,
+      'before': balance,
+      'after': null,
+      'status': null
+    };
+
+    if(type === TYPE.DEPOSIT) {
+      balance = balance + amount;
+      result.after = balance;
+      result.status = STATUS.APPROVED;
+    }
+
+    if(type === TYPE.WITHDRAW) {
       if (balance - amount >= 0) {
         balance = balance - amount;
-        return `Here’s your money: $${amount}`;
+        result.after = balance;
+        result.status = STATUS.APPROVED;
+      }  else {
+        result.after = balance;
+        result.status = STATUS.DENIED;
       }
-      return "Insufficient funds.";
-    },
-    deposit: function(amount) {
-      balance = balance + amount;
-      return `Your balance is: $${balance}`;
     }
+
+    transactions.push(result);
+    return result;
+  };
+
+  const withdraw = (amount) => {
+    const result = processTransaction(TYPE.WITHDRAW, amount);
+    return result;
+  };
+
+  const deposit = (amount) => {
+    const result = processTransaction(TYPE.DEPOSIT, amount);
+    return result;
+  };
+
+  const getBalance = () => balance;
+
+  const transactionHistory = () => transactions;
+
+  return {
+    'withdraw': withdraw,
+    'deposit': deposit,
+    'getBalance': getBalance,
+    'transactionHistory': transactionHistory
   };
 }
