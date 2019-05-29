@@ -52,7 +52,7 @@ function accountGenerator(initial) {
   let averages = {withdrawal: [], deposit: []};
   
   return {
-    balance: initial,
+    balance: balance,
     history: history,
     withdraw: function(amount) {
       const transaction = new Transaction('withdrawal', amount, balance);
@@ -90,17 +90,3 @@ function accountGenerator(initial) {
     }
   };
 }
-
-const testAccount = accountGenerator(500);
-console.log(testAccount.balance);
-testAccount.withdraw(10);
-testAccount.withdraw(15);
-testAccount.withdraw(19);
-testAccount.withdraw(27);
-testAccount.withdraw(13);
-testAccount.deposit(200);
-testAccount.withdraw(45);
-testAccount.withdraw(643);
-testAccount.deposit(100);
-testAccount.withdraw(23);
-console.log(testAccount.averageTransaction());

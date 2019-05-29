@@ -44,7 +44,43 @@ describe("accountGenerator", () => {
     expect(typeof accountGenerator).toBe("function");
   });
 
-  it("should have some tests", () => {
-    expect(false).toBeTruthy();
+  it("should return an object", () => {
+    var ret = accountGenerator();
+    expect(typeof ret === 'object' && ret.constructor === Object).toBeTruthy();
+  });
+
+  it("should return an object with getBalance property", () => {
+    var ret = accountGenerator();
+    expect(ret.getBalance).toBeDefined();
+  });
+
+  it("should return accurate balances after transactions", () => {
+    var account = accountGenerator(300);
+    account.deposit(300);
+    account.withdraw(400);
+    expect(account.getBalance()).toBe(200);
+  });
+
+  it("should reject withdrawals over the limit", () => {
+    var account = accountGenerator(100);
+    account.withdraw(1000);
+    expect(account.balance).toBe(100);
+  });
+
+  it("should return transaction history", () => {
+    var account = accountGenerator(500);
+    account.deposit(100);
+    account.withdraw(300);
+    account.withdraw(100);
+    expect(account.transactionHistory().length).toBe(3);
+  });
+
+  it("should return average deposits and withdrawals in an array", () => {
+    var account = accountGenerator(0);
+    account.deposit(50);
+    account.deposit(150);
+    account.withdraw(100);
+    account.withdraw(100);
+    expect(account.averageTransaction()).toEqual([100, 100]);
   });
 });
