@@ -97,10 +97,35 @@ function accountGenerator(initial) {
 
   const transactionHistory = () => transactions;
 
+  const averageTransaction = () => {
+    const result = {
+      deposit: null,
+      withdrawal: null
+    };
+
+    const calculateAverage = (arr) => {
+      return arr.reduce((total, transaction) => {
+          return total + transaction.amount;
+      }, 0) / arr.length;
+    };
+
+    const deposits = transactions.filter((transaction) => {
+      return transaction.type === TYPE.DEPOSIT && transaction.status === STATUS.APPROVED
+    });
+    const withdrawals = transactions.filter((transaction) => {
+      return transaction.type === TYPE.WITHDRAW && transaction.status === STATUS.APPROVED}
+    );
+
+    result.deposit = deposits.length ? calculateAverage(deposits) : 0;
+    result.withdrawal = withdrawals.length ? calculateAverage(withdrawals) : 0;
+    return result;
+  };
+
   return {
     'withdraw': withdraw,
     'deposit': deposit,
     'getBalance': getBalance,
-    'transactionHistory': transactionHistory
+    'transactionHistory': transactionHistory,
+    'averageTransaction': averageTransaction
   };
 }

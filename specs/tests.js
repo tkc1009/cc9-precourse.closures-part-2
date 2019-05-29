@@ -118,4 +118,29 @@ describe("accountGenerator", () => {
     account.deposit(1000);
     expect(account.transactionHistory(2).length).toBe(2);
   });
+
+  it("should have a averageTransaction method", () => {
+    const account = accountGenerator(1000);
+    expect(account.averageTransaction).toBeDefined();
+  });
+
+  it("averageTransaction method should retrieve averageTransaction obj", () => {
+    const account = accountGenerator(1000);
+    const average = account.averageTransaction();
+    expect(average.deposit).toBeDefined();
+    expect(average.withdrawal).toBeDefined();
+  });
+
+  it("averageTransaction method should calculate averages properly", () => {
+    const account = accountGenerator(1000);
+    account.deposit(1);
+    account.deposit(2);
+    account.deposit(3);
+    account.withdraw(100);
+    account.withdraw(200);
+    account.withdraw(300);
+    const average = account.averageTransaction();
+    expect(average.deposit).toBe(2);
+    expect(average.withdrawal).toBe(200);
+  });
 });
