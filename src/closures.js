@@ -100,9 +100,9 @@ function accountGenerator(initial) {
     if(n && typeof n !== 'number')
       return;
     else if(!n || n >= transactions.length)
-      return transactions.slice().reverse();
+      return transactions.slice();
     else
-      return transactions.slice(-n).reverse();
+      return transactions.slice(-n);
   }
 
   const averageTransaction = () => {

@@ -124,13 +124,13 @@ describe("accountGenerator", () => {
     expect(account.transactionHistory(2).length).toBe(0);
     account.deposit(1000);
     account.deposit(1000);
-    account.withdraw(100);
+    account.withdraw(200);
     account.deposit(100);
     expect(account.transactionHistory().length).toBe(4);
     var lastTwoTransactions = account.transactionHistory(2);
     expect(lastTwoTransactions.length).toBe(2);
-    expect(lastTwoTransactions[1].type).toBe('withdrawal');
-    expect(lastTwoTransactions[0].amount).toBe(100);
+    expect(lastTwoTransactions[1].type).toBe('deposit');
+    expect(lastTwoTransactions[0].amount).toBe(200);
   });
 
   it("should have a averageTransaction method", () => {
