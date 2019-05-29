@@ -36,25 +36,71 @@ function gameGenerator(upper) {
   }
 };
 
+class Transaction {
+  constructor(type, amount, before, after, status) {
+    this.type = type;
+    this.amount = amount;
+    this.before = before;
+    this.after = after;
+    this.status = status;
+  }
+}
+
 function accountGenerator(initial) {
   let balance = initial;
-
+  let history = [];
+  let averages = {withdrawal: [], deposit: []};
+  
   return {
+    balance: initial,
+    history: history,
     withdraw: function(amount) {
+      const transaction = new Transaction('withdrawal', amount, balance);
       if (balance - amount >= 0) {
-        balance = balance - amount;
-        return `Here’s your money: $${amount}`;
+        balance -= amount;
+        transaction.after = balance;
+        transaction.status = 'approved';
+        averages.withdrawal.push(transaction.amount);
+      } else {
+        transaction.after = balance;
+        transaction.status = 'denied';
       }
-      return "Insufficient funds.";
+      history.push(transaction);
+      return transaction;
     },
     deposit: function(amount) {
+      const transaction = new Transaction('deposit', amount, balance, balance + amount, 'approved');
       balance = balance + amount;
-      return `Your balance is: $${balance}`;
+      history.push(transaction);
+      averages.deposit.push(transaction.amount);
+      return transaction;
+    },
+    getBalance: function() {
+      return balance;
+    },
+    transactionHistory: function() {
+      return history;
+    },
+    averageTransaction: function() {
+      return [averages.deposit.reduce((a, b) => {
+        return a + b;
+      }) / averages.deposit.length, averages.withdrawal.reduce((a, b) => {
+        return a + b;
+      }) / averages.withdrawal.length]
     }
   };
 }
 
-const game = gameGenerator(4);
-for (let i = 0; i < 5; i++) {
-  console.log(game.guess(i));
-}
+const testAccount = accountGenerator(500);
+console.log(testAccount.balance);
+testAccount.withdraw(10);
+testAccount.withdraw(15);
+testAccount.withdraw(19);
+testAccount.withdraw(27);
+testAccount.withdraw(13);
+testAccount.deposit(200);
+testAccount.withdraw(45);
+testAccount.withdraw(643);
+testAccount.deposit(100);
+testAccount.withdraw(23);
+console.log(testAccount.averageTransaction());
