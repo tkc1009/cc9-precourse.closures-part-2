@@ -43,12 +43,12 @@ function accountGenerator(initial) {
   let balance = initial;
   const transactions = [];
 
-  STATUS = {
+  const STATUS = {
     APPROVED: 'approved',
     DENIED: 'denied'
   };
 
-  TYPE = {
+  const TYPE = {
     DEPOSIT: 'deposit',
     WITHDRAW: 'withdrawal'
   };
