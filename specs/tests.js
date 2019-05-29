@@ -75,12 +75,12 @@ describe("accountGenerator", () => {
     expect(account.transactionHistory().length).toBe(3);
   });
 
-  it("should return average deposits and withdrawals in an array", () => {
+  it("should return average deposits and withdrawals in an object", () => {
     var account = accountGenerator(0);
     account.deposit(50);
     account.deposit(150);
     account.withdraw(100);
     account.withdraw(100);
-    expect(account.averageTransaction()).toEqual([100, 100]);
+    expect(account.averageTransaction()).toEqual({deposit: 100, withdrawal: 100});
   });
 });

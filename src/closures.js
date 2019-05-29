@@ -82,11 +82,11 @@ function accountGenerator(initial) {
       return history;
     },
     averageTransaction: function() {
-      return [averages.deposit.reduce((a, b) => {
+      return {deposit: averages.deposit.reduce((a, b) => {
         return a + b;
-      }) / averages.deposit.length, averages.withdrawal.reduce((a, b) => {
+      }) / averages.deposit.length, withdrawal: averages.withdrawal.reduce((a, b) => {
         return a + b;
-      }) / averages.withdrawal.length]
+      }) / averages.withdrawal.length}
     }
   };
 }
