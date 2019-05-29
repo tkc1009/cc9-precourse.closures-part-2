@@ -62,6 +62,14 @@ describe("gameGenerator", () => {
 });
 
 describe("accountGenerator", () => {
+  beforeEach(() => {
+    jasmine.clock().install();
+  });
+
+  afterEach(function() {
+    jasmine.clock().uninstall();
+  });
+
   it("should be there", () => {
     expect(accountGenerator).toBeDefined();
     expect(typeof accountGenerator).toBe("function");
@@ -142,5 +150,17 @@ describe("accountGenerator", () => {
     const average = account.averageTransaction();
     expect(average.deposit).toBe(2);
     expect(average.withdrawal).toBe(200);
+  });
+
+  it("transactions should have a time field that stores transaction Date", () => {
+    const account = accountGenerator(1000);
+    jasmine.clock().mockDate();
+    var transactionTime = new Date();
+    account.deposit(100);
+    jasmine.clock().tick(600);
+    expect(account.transactionHistory()[0].time).toBeDefined();
+    expect(account.transactionHistory()[0].time instanceof Date).toBe(true);
+    expect(account.transactionHistory()[0].time.getTime())
+        .toBe(transactionTime.getTime());
   });
 });

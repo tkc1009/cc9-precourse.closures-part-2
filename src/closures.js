@@ -59,7 +59,8 @@ function accountGenerator(initial) {
       'amount': amount,
       'before': balance,
       'after': null,
-      'status': null
+      'status': null,
+      'time': new Date()
     };
 
     if(type === TYPE.DEPOSIT) {
