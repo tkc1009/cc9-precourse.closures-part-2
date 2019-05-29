@@ -68,7 +68,55 @@ describe("accountGenerator", () => {
     expect(typeof accountGenerator).toBe("function");
   });
 
-  it("should have some tests", () => {
-    expect(false).toBeTruthy();
+  it("should have a getBalance method", () => {
+    const account = accountGenerator(10000);
+    expect(account.getBalance).toBeDefined();
+  });
+
+  it("getBalance method should properly retrieve current balance", () => {
+    const account = accountGenerator(10000);
+    expect(account.getBalance()).toBe(10000);
+  });
+
+  it("withdraw method should return a transaction object", () => {
+    const account = accountGenerator(1000);
+    const transaction = account.withdraw(100);
+    expect(typeof transaction).toBe('object');
+    expect(transaction.type).toBeDefined();
+    expect(transaction.amount).toBeDefined();
+    expect(transaction.before).toBeDefined();
+    expect(transaction.after).toBeDefined();
+    expect(transaction.status).toBeDefined();
+  });
+
+  it("transaction will be denied if balance is insufficient", () => {
+    const account = accountGenerator(100);
+    const transaction = account.withdraw(1000);
+    const denyStatusStr = 'denied'
+    expect(transaction.status).toBe(denyStatusStr);
+  });
+
+  it("deposit method should return a transaction object", () => {
+    const account = accountGenerator(1000);
+    const transaction = account.deposit(1000);
+    expect(typeof transaction).toBe('object');
+    expect(transaction.type).toBeDefined();
+    expect(transaction.amount).toBeDefined();
+    expect(transaction.before).toBeDefined();
+    expect(transaction.after).toBeDefined();
+    expect(transaction.status).toBeDefined();
+  });
+
+  it("should have a transactionHistory method", () => {
+    const account = accountGenerator(10000);
+    expect(account.transactionHistory).toBeDefined();
+  });
+
+  it("transactionHistory method should retrieve last n transactions", () => {
+    const account = accountGenerator(10000);
+    expect(account.transactionHistory(2).length).toBe(0);
+    account.deposit(1000);
+    account.deposit(1000);
+    expect(account.transactionHistory(2).length).toBe(2);
   });
 });
