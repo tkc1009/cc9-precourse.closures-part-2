@@ -13,7 +13,7 @@ describe("gameGenerator", () => {
     const bound = 4;
     const game = gameGenerator(bound);
     const number = [];
-    for (let i = 0; i < bound; i++) {
+    for (let i = 0; i <= bound; i++) {
       if (game.guess(i)) {
         number.push(i);
       }
@@ -22,7 +22,6 @@ describe("gameGenerator", () => {
   });
 
   it("should have a reset method", () => {
-    // How do you test for this?
     const game = gameGenerator(4);
     expect(game.guess).toBeDefined();
   });
@@ -36,7 +35,7 @@ describe("gameGenerator", () => {
     const bound = 10;
     const game = gameGenerator(bound);
     const number = [];
-    for (let i = 0; i < bound; i++) {
+    for (let i = 0; i <= bound; i++) {
       if (game.guess(i)) {
         number.push(i);
       }
