@@ -83,16 +83,26 @@ function accountGenerator(initial) {
       return transactionHistory.slice(0, length);
     },
     averageTransaction: () => {
-      let total = 0;
-      let count = 0;
+      let depositTotal = 0;
+      let depositCount = 0;
+      let withdrawalTotal = 0;
+      let withdrawalCount = 0;
       const transactionHistory = account.transactionHistory();
       for (let i = 0; i < transactionHistory.length; i++) {
         if (transactionHistory[i].status === "approved") {
-          total = total + transactionHistory[i].amount;
-          count = count + 1;
+          if (transactionHistory[i].type === "deposit") {
+            depositTotal = depositTotal + transactionHistory[i].amount;
+            depositCount++;
+          } else if (transactionHistory[i].type === "withdrawal") {
+            withdrawalTotal = withdrawalTotal + transactionHistory[i].amount;
+            withdrawalCount++;
+          }
         }
       }
-      return (total / count);
+      return {
+        deposit: depositTotal / depositCount,
+        withdrawal: withdrawalTotal / withdrawalCount
+      }
     }
   };
   return account;
