@@ -155,5 +155,16 @@ describe("accountGenerator", () => {
     }
   })
 
+  it("should have a function to return the average of successful transactions", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    account.deposit(10);
+    account.withdraw(40);
+    account.deposit(100);
+    account.withdraw(1000);
+    const expectedAverage = (10 + 100 + 40) / 3;
+    expect(account.averageTransaction()).toEqual(expectedAverage);
+  })
+
 
 });
