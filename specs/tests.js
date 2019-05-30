@@ -104,5 +104,41 @@ describe("accountGenerator", () => {
     expect(account.getBalance()).toEqual(initialBalance + depositAmount);
   });
 
+  it("should return an approved transaction object upon withdrawal of amount less than balance", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    const withdrawalAmount = 50;
+    const returnedTransaction = account.withdraw(withdrawalAmount);
+    expect(returnedTransaction.type).toEqual("withdrawal")
+    expect(returnedTransaction.amount).toEqual(withdrawalAmount)
+    expect(returnedTransaction.before).toEqual(initialBalance)
+    expect(returnedTransaction.after).toEqual(initialBalance - withdrawalAmount)
+    expect(returnedTransaction.status).toEqual("approved")
+  })
+
+  it("should return an denied transaction object upon withdrawal of amount less than balance", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    const withdrawalAmount = 150;
+    const returnedTransaction = account.withdraw(withdrawalAmount);
+    expect(returnedTransaction.type).toEqual("withdrawal")
+    expect(returnedTransaction.amount).toEqual(withdrawalAmount)
+    expect(returnedTransaction.before).toEqual(initialBalance)
+    expect(returnedTransaction.after).toEqual(initialBalance)
+    expect(returnedTransaction.status).toEqual("denied")
+  })
+
+  it("should return an approved transaction object upon deposit of any amount", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    const depositAmount = 50;
+    const returnedTransaction = account.deposit(depositAmount);
+    expect(returnedTransaction.type).toEqual("deposit")
+    expect(returnedTransaction.amount).toEqual(depositAmount)
+    expect(returnedTransaction.before).toEqual(initialBalance)
+    expect(returnedTransaction.after).toEqual(initialBalance + depositAmount)
+    expect(returnedTransaction.status).toEqual("approved")
+  })
+
 
 });
