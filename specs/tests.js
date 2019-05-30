@@ -82,7 +82,9 @@ describe("accountGenerator", () => {
     expect(typeof accountGenerator).toBe("function");
   });
 
-  it("should have some tests", () => {
-    expect(false).toBeTruthy();
+  it("should have a getBalance function that returns the right balance", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    expect(account.getBalance()).toEqual(initialBalance);
   });
 });
