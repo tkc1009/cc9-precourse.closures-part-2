@@ -41,14 +41,37 @@ function accountGenerator(initial) {
     },
     withdraw: (amount) => {
       if (balance - amount >= 0) {
+        const transaction = {
+          type: "withdrawal",
+          amount: amount,
+          before: balance,
+          after: balance - amount,
+          status: "approved"
+        }
         balance = balance - amount;
-        return `Here’s your money: $${amount}`;
+        return transaction;
+      } else {
+        const transaction = {
+          type: "withdrawal",
+          amount: amount,
+          before: balance,
+          after: balance,
+          status: "denied"
+        }
+        return transaction;
       }
-      return "Insufficient funds.";
+      
     },
     deposit: (amount) => {
+      const transaction = {
+        type: "deposit",
+        amount: amount,
+        before: balance,
+        after: balance + amount,
+        status: "approved"
+      }
       balance = balance + amount;
-      return `Your balance is: $${balance}`;
+      return transaction;
     }
   };
 }
