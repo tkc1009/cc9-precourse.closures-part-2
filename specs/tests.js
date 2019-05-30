@@ -13,7 +13,7 @@ describe("gameGenerator", () => {
     const bound = 4;
     const game = gameGenerator(bound);
     const number = [];
-    for (let i = 0; i < bound; i++) {
+    for (let i = 0; i <= bound; i++) {
       if (game.guess(i)) {
         number.push(i);
       }
@@ -26,7 +26,7 @@ describe("gameGenerator", () => {
     const game = gameGenerator(bound);
     game.reset();
     const number = [];
-    for (let i = 0; i < bound; i++) {
+    for (let i = 0; i <= bound; i++) {
       if (game.guess(i)) {
         number.push(i);
       }
@@ -41,7 +41,7 @@ describe("gameGenerator", () => {
 
     // Che
     let firstWinningNumber; 
-    for (let i = 0; i < bound; i++) {
+    for (let i = 0; i <= bound; i++) {
       if (game.guess(i)) { firstWinningNumber = i; }
     }
 
