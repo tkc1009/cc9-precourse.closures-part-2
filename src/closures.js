@@ -11,7 +11,7 @@ function randomInteger(n) {
 function gameGenerator(limit) {
   let targetValue = randomInteger(limit);
   let guessCounter = 0;
-  return {
+  const game = {
     reset: () => {
       targetValue = randomInteger(limit);
       guessCounter = 0;
@@ -25,11 +25,11 @@ function gameGenerator(limit) {
     },
     giveUp: () => {
       const oldTargetValue = targetValue;
-      targetValue = randomInteger(limit);
-      guessCounter = 0;
+      game.reset();
       return oldTargetValue;
     }
   }
+  return game;
 }
 
 function accountGenerator(initial) {
