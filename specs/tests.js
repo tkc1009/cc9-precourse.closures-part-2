@@ -59,9 +59,9 @@ describe("gameGenerator", () => {
     game.guess(1);
     game.guess(2);
     game.guess(3);
-    expect(game.numGuesses).toEqual(3);
+    expect(game.numGuesses()).toEqual(3);
     game.reset();
-    expect(game.numGuesses).toEqual(0);
+    expect(game.numGuesses()).toEqual(0);
   });
 
 });
