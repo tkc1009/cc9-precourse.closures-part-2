@@ -36,14 +36,17 @@ function accountGenerator(initial) {
   let balance = initial;
 
   return {
-    withdraw: function(amount) {
+    getBalance: () => {
+      return balance;
+    },
+    withdraw: (amount) => {
       if (balance - amount >= 0) {
         balance = balance - amount;
         return `Here’s your money: $${amount}`;
       }
       return "Insufficient funds.";
     },
-    deposit: function(amount) {
+    deposit: (amount) => {
       balance = balance + amount;
       return `Your balance is: $${balance}`;
     }
