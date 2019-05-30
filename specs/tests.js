@@ -140,5 +140,20 @@ describe("accountGenerator", () => {
     expect(returnedTransaction.status).toEqual("approved")
   })
 
+  it("should have a function to return the transaction history", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    const transactionHistory = [];
+    transactionHistory.push(account.deposit(10));
+    transactionHistory.push(account.deposit(100));
+    transactionHistory.push(account.withdraw(50));
+    transactionHistory.push(account.withdraw(120));
+    transactionHistory.push(account.deposit(1));
+    const returnedTransactionHistory = account.transactionHistory(5);
+    for (let i = 0; i < transactionHistory.length; i++) {
+      expect(transactionHistory[i]).toEqual(returnedTransactionHistory[i]);
+    }
+  })
+
 
 });
