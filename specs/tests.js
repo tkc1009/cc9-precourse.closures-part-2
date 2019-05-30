@@ -48,7 +48,7 @@ describe("gameGenerator", () => {
     // Reset and the same winning number until it returns false 
     while (game.guess(firstWinningNumber)) {
       game.reset();
-      results.push(games.guess(firstWinningNumber));
+      results.push(game.guess(firstWinningNumber));
     }
     expect(results).toContain(false);
   });
