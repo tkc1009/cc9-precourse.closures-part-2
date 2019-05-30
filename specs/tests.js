@@ -87,4 +87,22 @@ describe("accountGenerator", () => {
     const account = accountGenerator(initialBalance);
     expect(account.getBalance()).toEqual(initialBalance);
   });
+
+  it("should have a withdraw function that decreases the balance", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    const withdrawalAmount = 50;
+    account.withdraw(withdrawalAmount);
+    expect(account.getBalance()).toEqual(initialBalance - withdrawalAmount);
+  });
+
+  it("should have a deposit function that increases the balance", () => {
+    const initialBalance = 100;
+    const account = accountGenerator(initialBalance);
+    const depositAmount = 50;
+    account.deposit(depositAmount);
+    expect(account.getBalance()).toEqual(initialBalance + depositAmount);
+  });
+
+
 });
