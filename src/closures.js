@@ -8,7 +8,9 @@ function randomInteger(n) {
   return Math.floor(Math.random() * (n + 1));
 }
 
-function gameGenerator() {}
+function gameGenerator() {
+  return {}
+}
 
 function accountGenerator(initial) {
   let balance = initial;
