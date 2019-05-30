@@ -46,7 +46,8 @@ function accountGenerator(initial) {
           amount: amount,
           before: balance,
           after: balance - amount,
-          status: "approved"
+          status: "approved",
+          time: Date.now()
         }
         balance = balance - amount;
         transactionHistory.push(transaction);
@@ -57,7 +58,8 @@ function accountGenerator(initial) {
           amount: amount,
           before: balance,
           after: balance,
-          status: "denied"
+          status: "denied",
+          time: Date.now()
         }
         transactionHistory.push(transaction);
         return transaction;
@@ -70,7 +72,8 @@ function accountGenerator(initial) {
         amount: amount,
         before: balance,
         after: balance + amount,
-        status: "approved"
+        status: "approved",
+        time: Date.now()
       }
       balance = balance + amount;
       transactionHistory.push(transaction);
