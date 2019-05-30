@@ -34,7 +34,7 @@ function gameGenerator(limit) {
 
 function accountGenerator(initial) {
   let balance = initial;
-
+  const transactionHistory = [];
   return {
     getBalance: () => {
       return balance;
@@ -49,6 +49,7 @@ function accountGenerator(initial) {
           status: "approved"
         }
         balance = balance - amount;
+        transactionHistory.push(transaction);
         return transaction;
       } else {
         const transaction = {
@@ -58,6 +59,7 @@ function accountGenerator(initial) {
           after: balance,
           status: "denied"
         }
+        transactionHistory.push(transaction);
         return transaction;
       }
       
@@ -71,7 +73,11 @@ function accountGenerator(initial) {
         status: "approved"
       }
       balance = balance + amount;
+      transactionHistory.push(transaction);
       return transaction;
+    },
+    transactionHistory: (length) => {
+      return transactionHistory.slice(0, length);
     }
   };
 }
