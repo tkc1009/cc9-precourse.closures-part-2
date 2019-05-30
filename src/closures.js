@@ -10,10 +10,19 @@ function randomInteger(n) {
 
 function gameGenerator(limit) {
   let targetValue = randomInteger(limit);
+  let guessCounter = 0;
   return {
+    reset: () => {
+      targetValue = randomInteger(limit);
+      guessCounter = 0;
+    },
     guess: (guessValue) => {
+      guessCounter++;
       return (guessValue === targetValue);
-    }
+    },
+    numGuesses: () => {
+      return guessCounter;
+    },
   }
 }
 
