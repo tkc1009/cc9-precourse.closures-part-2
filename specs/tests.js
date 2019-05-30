@@ -39,7 +39,6 @@ describe("gameGenerator", () => {
     const game = gameGenerator(bound);
     const results = [];
 
-    // Che
     let firstWinningNumber; 
     for (let i = 0; i <= bound; i++) {
       if (game.guess(i)) { firstWinningNumber = i; }
@@ -62,6 +61,17 @@ describe("gameGenerator", () => {
     expect(game.numGuesses()).toEqual(3);
     game.reset();
     expect(game.numGuesses()).toEqual(0);
+  });
+
+  it("should have a give up function that returns the winning number", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    let winningNumber; 
+    for (let i = 0; i <= bound; i++) {
+      if (game.guess(i)) { winningNumber = i; }
+    }
+    expect(game.giveUp()).toEqual(winningNumber);
+
   });
 
 });
