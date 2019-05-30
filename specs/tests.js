@@ -158,12 +158,21 @@ describe("accountGenerator", () => {
   it("should have a function to return the average of successful transactions", () => {
     const initialBalance = 100;
     const account = accountGenerator(initialBalance);
+
     account.deposit(10);
-    account.withdraw(40);
     account.deposit(100);
+    account.deposit(20);
+    account.deposit(30);
+
+    account.withdraw(40);
+    account.withdraw(100);
+    account.withdraw(10);
     account.withdraw(1000);
-    const expectedAverage = (10 + 100 + 40) / 3;
-    expect(account.averageTransaction()).toEqual(expectedAverage);
+
+    const expectedDepositAverage = (10 + 100 + 20 + 30) / 4;
+    const expectedWithdrawalAverage = (40 + 100 + 10) / 3;
+    expect(account.averageTransaction().deposit).toEqual(expectedDepositAverage);
+    expect(account.averageTransaction().withdrawal).toEqual(expectedWithdrawalAverage);
   })
 
 
