@@ -23,6 +23,12 @@ function gameGenerator(limit) {
     numGuesses: () => {
       return guessCounter;
     },
+    giveUp: () => {
+      const oldTargetValue = targetValue;
+      targetValue = randomInteger(limit);
+      guessCounter = 0;
+      return oldTargetValue;
+    }
   }
 }
 
