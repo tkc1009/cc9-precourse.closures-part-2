@@ -8,8 +8,13 @@ function randomInteger(n) {
   return Math.floor(Math.random() * (n + 1));
 }
 
-function gameGenerator() {
-  return {}
+function gameGenerator(limit) {
+  let targetValue = randomInteger(limit);
+  return {
+    guess: (guessValue) => {
+      return (guessValue === targetValue);
+    }
+  }
 }
 
 function accountGenerator(initial) {
