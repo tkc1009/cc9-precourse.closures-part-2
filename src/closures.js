@@ -17,12 +17,12 @@ function gameGenerator(upper) {
     
     reset: function reset() {    
     guesses = 0;
-    answer = randomInteger(upper);
+    this.answer = randomInteger(upper);
   },
 
     giveUp: function giveUp() {
       let old = answer;
-      this.reset();
+      reset();
       return old;
     },
 
@@ -91,3 +91,8 @@ function accountGenerator(initial) {
     }
   };
 }
+
+const game = gameGenerator(10);
+console.log(game.answer);
+game.reset();
+console.log(game.answer);
