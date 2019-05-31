@@ -21,8 +21,9 @@ function gameGenerator(upper) {
   },
 
     giveUp: function giveUp() {
-      console.log(`The answer is ${answer}`);
-      reset();
+      let old = answer;
+      this.reset();
+      return old;
     },
 
     guess: function guess(guess) {
@@ -30,7 +31,7 @@ function gameGenerator(upper) {
       return guess === this.answer;
     },
 
-    numGuesses: function numGuesses() {
+    numberGuesses: function numberGuesses() {
       return guesses;
     }
   }
