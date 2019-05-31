@@ -38,13 +38,13 @@ function gameGenerator(upper) {
 };
 
 class Transaction {
-  constructor(type, amount, before, after, status, time) {
+  constructor(type, amount, before, after, status) {
     this.type = type;
     this.amount = amount;
     this.before = before;
     this.after = after;
     this.status = status;
-    this.time = Date.now();
+    this.time = new Date(Date.now());
   }
 }
 
