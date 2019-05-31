@@ -22,7 +22,7 @@ function gameGenerator(upper) {
 
     giveUp: function giveUp() {
       let old = answer;
-      this.reset.reset();
+      this.reset();
       return old;
     },
 
