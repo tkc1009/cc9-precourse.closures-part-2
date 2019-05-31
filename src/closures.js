@@ -80,8 +80,12 @@ function accountGenerator(initial) {
     getBalance: function() {
       return balance;
     },
-    transactionHistory: function() {
-      return history;
+    transactionHistory: function(count) {
+      var result = history.slice(history.length - count);
+      if (!count) {
+        return history;
+      }
+      return result;
     },
     averageTransaction: function() {
       return {deposit: averages.deposit.reduce((a, b) => {
@@ -92,3 +96,10 @@ function accountGenerator(initial) {
     }
   };
 }
+
+const acc = accountGenerator(500);
+acc.withdraw(10);
+acc.withdraw(10);
+acc.withdraw(10);
+acc.withdraw(10);
+console.log(acc.transactionHistory(1));
