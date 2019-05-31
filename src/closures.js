@@ -96,10 +96,3 @@ function accountGenerator(initial) {
     }
   };
 }
-
-const acc = accountGenerator(500);
-acc.withdraw(10);
-acc.withdraw(10);
-acc.withdraw(10);
-acc.withdraw(10);
-console.log(acc.transactionHistory(1));
