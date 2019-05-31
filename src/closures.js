@@ -15,13 +15,13 @@ function gameGenerator(upper) {
   return {
     answer: answer,
     
-    reset: function reset() {    
-    this.guesses = 0;
+    reset: function reset() {
     this.answer = randomInteger(upper);
   },
 
     giveUp: function giveUp() {
-      let old = answer;
+      let old = this.answer;
+      this.guesses = 0;
       this.reset();
       return old;
     },
@@ -91,8 +91,3 @@ function accountGenerator(initial) {
     }
   };
 }
-
-const game = gameGenerator(10);
-console.log(game.answer);
-game.reset();
-console.log(game.answer);
