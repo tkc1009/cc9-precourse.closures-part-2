@@ -16,18 +16,18 @@ function gameGenerator(upper) {
     answer: answer,
     
     reset: function reset() {    
-    guesses = 0;
-    answer = randomInteger(upper);
+    this.guesses = 0;
+    this.answer = randomInteger(upper);
   },
 
     giveUp: function giveUp() {
       let old = answer;
-      reset();
+      this.reset.reset();
       return old;
     },
 
     guess: function guess(guess) {
-      guesses++;
+      this.guesses++;
       return guess === this.answer;
     },
 
