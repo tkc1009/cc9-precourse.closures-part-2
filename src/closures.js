@@ -16,23 +16,23 @@ function gameGenerator(upper) {
     answer: answer,
     
     reset: function reset() {    
-    guesses = 0;
+    this.guesses = 0;
     this.answer = randomInteger(upper);
   },
 
     giveUp: function giveUp() {
-      let old = answer;
+      let old = this.answer;
       reset();
       return old;
     },
 
     guess: function guess(guess) {
-      guesses++;
+      this.guesses++;
       return guess === this.answer;
     },
 
     numberGuesses: function numberGuesses() {
-      return guesses;
+      return this.guesses;
     }
   }
 };
