@@ -21,13 +21,13 @@ function gameGenerator(upper) {
 
     giveUp: function giveUp() {
       let old = this.answer;
-      this.guesses = 0;
+      guesses = 0;
       this.reset();
       return old;
     },
 
     guess: function guess(guess) {
-      this.guesses++;
+      guesses++;
       return guess === this.answer;
     },
 
