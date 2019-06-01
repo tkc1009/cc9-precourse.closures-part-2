@@ -39,33 +39,34 @@ function accountGenerator(initial) {
     getBalance: () => {
       return balance;
     },
+
     withdraw: (amount) => {
+      let transaction;
       if (balance - amount >= 0) {
-        const transaction = {
+        transaction = {
           type: "withdrawal",
           amount: amount,
           before: balance,
           after: balance - amount,
           status: "approved",
-          time: Date.now()
+          time: new Date(Date.now())
         }
         balance = balance - amount;
-        transactionHistory.push(transaction);
-        return transaction;
       } else {
-        const transaction = {
+        transaction = {
           type: "withdrawal",
           amount: amount,
           before: balance,
           after: balance,
           status: "denied",
-          time: Date.now()
+          time: new Date(Date.now())
         }
-        transactionHistory.push(transaction);
-        return transaction;
       }
-      
+      console.log(transaction);
+      transactionHistory.push(transaction);
+      return transaction;
     },
+
     deposit: (amount) => {
       const transaction = {
         type: "deposit",
@@ -73,15 +74,18 @@ function accountGenerator(initial) {
         before: balance,
         after: balance + amount,
         status: "approved",
-        time: Date.now()
+        time: new Date(Date.now())
       }
       balance = balance + amount;
       transactionHistory.push(transaction);
+      console.log(transaction);
       return transaction;
     },
+
     transactionHistory: (length = 0) => {
       return transactionHistory.slice(-length);
     },
+
     averageTransaction: () => {
       let depositTotal = 0;
       let depositCount = 0;
