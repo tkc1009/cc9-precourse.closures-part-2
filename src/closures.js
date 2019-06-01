@@ -62,7 +62,6 @@ function accountGenerator(initial) {
           time: new Date(Date.now())
         }
       }
-      console.log(transaction);
       transactionHistory.push(transaction);
       return transaction;
     },
@@ -78,7 +77,6 @@ function accountGenerator(initial) {
       }
       balance = balance + amount;
       transactionHistory.push(transaction);
-      console.log(transaction);
       return transaction;
     },
 
