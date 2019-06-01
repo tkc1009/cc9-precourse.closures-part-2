@@ -16,7 +16,6 @@ describe("gameGenerator", () => {
   });
 
   it("should have just one winning number", () => {
-    
     const number = [];
     for (let i = 0; i <= this.bound; i++) {
       if (this.game.guess(i)) {
@@ -57,9 +56,9 @@ describe("gameGenerator", () => {
     this.game.guess(1);
     this.game.guess(2);
     this.game.guess(3);
-    expect(this.game.numGuesses()).toEqual(3);
+    expect(this.game.numberGuesses()).toEqual(3);
     this.game.reset();
-    expect(this.game.numGuesses()).toEqual(0);
+    expect(this.game.numberGuesses()).toEqual(0);
   });
 
   it("should have a give up function that returns the winning number", () => {

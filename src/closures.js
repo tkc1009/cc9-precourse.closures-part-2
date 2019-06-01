@@ -20,7 +20,7 @@ function gameGenerator(limit) {
       guessCounter++;
       return (guessValue === targetValue);
     },
-    numGuesses: () => {
+    numberGuesses: () => {
       return guessCounter;
     },
     giveUp: () => {
