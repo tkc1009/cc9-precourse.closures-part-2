@@ -143,6 +143,19 @@ describe("accountGenerator", () => {
     }
   })
 
+  it("should have a function to return the transaction history that returns last n transactions", () => {  
+    const transactionHistory = [];
+    transactionHistory.push(this.account.deposit(10));
+    transactionHistory.push(this.account.deposit(100));
+    transactionHistory.push(this.account.withdraw(50));
+    transactionHistory.push(this.account.withdraw(120));
+    transactionHistory.push(this.account.deposit(1));
+    const returnedTransactionHistory = this.account.transactionHistory(3);
+    for (let i = 0; i < returnedTransactionHistory.length; i++) {
+      expect(transactionHistory[2 + i]).toEqual(returnedTransactionHistory[i]);
+    }
+  })
+
   it("should have a function to return the average of successful transactions", () => {
     this.account.deposit(10);
     this.account.deposit(100);

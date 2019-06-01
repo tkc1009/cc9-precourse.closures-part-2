@@ -79,8 +79,8 @@ function accountGenerator(initial) {
       transactionHistory.push(transaction);
       return transaction;
     },
-    transactionHistory: (length) => {
-      return transactionHistory.slice(0, length);
+    transactionHistory: (length = 0) => {
+      return transactionHistory.slice(-length);
     },
     averageTransaction: () => {
       let depositTotal = 0;
