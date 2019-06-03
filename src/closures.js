@@ -8,7 +8,29 @@ function randomInteger(n) {
   return Math.floor(Math.random() * (n + 1));
 }
 
-function gameGenerator() {}
+function gameGenerator(x) {
+  const upperBound = x;
+  let numberOfWin = randomInteger(upperBound);
+  let numbersOfGuess = [];
+
+  return {
+    reset: () => {
+      numberOfWin = randomInteger(upperBound);
+      let numbersOfGuess = [];
+    },
+    giveUp: () => {
+      reset();
+      return numberOfWin;
+    },
+    guess: (y) => {
+      numbersOfGuess.push(y);
+      return numberOfWin === y;
+    },
+    numGuesses: () => {
+      return numbersOfGuess;
+    }
+  }
+}
 
 function accountGenerator(initial) {
   let balance = initial;

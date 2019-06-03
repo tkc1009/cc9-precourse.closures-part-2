@@ -22,12 +22,31 @@ describe("gameGenerator", () => {
   });
 
   it("should have a reset method", () => {
-    // How do you test for this?
-    expect(false).toBeTruthy();
+    const bound = 4;
+    const game = gameGenerator(bound);
+    expect(game.reset).toBeDefined();
+    expect(typeof game.reset).toBe("function");
   });
 
-  it("create your own test", () => {
-    expect(false).toBeTruthy();
+  it("should have a giveUp method", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    expect(game.giveUp).toBeDefined();
+    expect(typeof game.giveUp).toBe("function");
+  });
+
+  it("should have a guess method", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    expect(game.guess).toBeDefined();
+    expect(typeof game.guess).toBe("function");
+  });
+
+  it("should have a numGuesses method", () => {
+    const bound = 4;
+    const game = gameGenerator(bound);
+    expect(game.numGuesses).toBeDefined();
+    expect(typeof game.numGuesses).toBe("function");
   });
 });
 
