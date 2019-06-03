@@ -13,7 +13,7 @@ describe("gameGenerator", () => {
     const bound = 4;
     const game = gameGenerator(bound);
     const number = [];
-    for (let i = 0; i < bound; i++) {
+    for (let i = 0; i <= bound; i++) {
       if (game.guess(i)) {
         number.push(i);
       }
@@ -50,7 +50,6 @@ describe("gameGenerator", () => {
   });
 
   it("should change the numberOfWin by reset", () => {
-    console.log("should change the numberOfWin by reset");
     const bound = 5;
     const game = gameGenerator(bound);
     let number1;
@@ -70,7 +69,6 @@ describe("gameGenerator", () => {
   });
 
   it("should change the numberOfWin by giveUp", () => {
-    console.log("should change the numberOfWin by giveUp");
     const bound = 5;
     const game = gameGenerator(bound);
     let number1;
@@ -81,7 +79,6 @@ describe("gameGenerator", () => {
   });
 
   it("should delete the numbersOfGuess by giveUp", () => {
-    console.log("should delete the numbersOfGuess by giveUp");
     const bound = 5;
     const game = gameGenerator(bound);
     let number1;
@@ -96,7 +93,6 @@ describe("gameGenerator", () => {
   });
 
   it("should add the numbersOfGuess by guess", () => {
-    console.log("should add the numbersOfGuess by guess");
     const bound = 5;
     const game = gameGenerator(bound);
     let number1;
@@ -110,7 +106,6 @@ describe("gameGenerator", () => {
   });
 
   it("should return the numbersOfGuess by numberGuesses ", () => {
-    console.log("should return the numbersOfGuess by numberGuesses ");
     const bound = 4;
     const game = gameGenerator(bound);
     const number = [];

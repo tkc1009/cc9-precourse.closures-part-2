@@ -15,15 +15,17 @@ function gameGenerator(x) {
   let numbersOfGuess = [];
   return {
     reset: () => {
-      numberOfWin = randomInteger(upperBound);
+      numberOfLastWin = numberOfWin;
+      do {
+        numberOfWin = randomInteger(upperBound);
+      } while(numberOfWin === numberOfLastWin);  
       numbersOfGuess = [];
     },
     giveUp: () => {
       numberOfLastWin = numberOfWin;
-      // for(let temp = randomInteger(upperBound); temp !== numberOfLastWin; temp = randomInteger(upperBound)){
-      //   numberOfWin = temp;
-      // }
-      numberOfWin = randomInteger(upperBound);
+      do {
+        numberOfWin = randomInteger(upperBound);
+      } while(numberOfWin === numberOfLastWin);
       numbersOfGuess = [];
       return numberOfLastWin;
     },
