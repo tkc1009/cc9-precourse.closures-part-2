@@ -42,11 +42,11 @@ describe("gameGenerator", () => {
     expect(typeof game.guess).toBe("function");
   });
 
-  it("should have a numGuesses method", () => {
+  it("should have a numberGuesses method", () => {
     const bound = 4;
     const game = gameGenerator(bound);
-    expect(game.numGuesses).toBeDefined();
-    expect(typeof game.numGuesses).toBe("function");
+    expect(game.numberGuesses).toBeDefined();
+    expect(typeof game.numberGuesses).toBe("function");
   });
 
   it("should change the numberOfWin by reset", () => {
@@ -89,9 +89,9 @@ describe("gameGenerator", () => {
     for (let i = 0; i <= bound; i++) {
       game.guess(i)
     }
-    array1 = game.numGuesses();
+    array1 = game.numberGuesses();
     game.giveUp();
-    array2 = game.numGuesses();
+    array2 = game.numberGuesses();
     expect(array2.length).toBeLessThan(array1.length);
   });
 
@@ -102,15 +102,15 @@ describe("gameGenerator", () => {
     let lengthOfGuess1;
     let lengthOfGuess2;
     game.guess(1);
-    lengthOfGuess1 = game.numGuesses().length;
+    lengthOfGuess1 = game.numberGuesses().length;
     game.guess(2);
-    lengthOfGuess2 = game.numGuesses().length;
+    lengthOfGuess2 = game.numberGuesses().length;
     expect(lengthOfGuess1).toEqual(1);
     expect(lengthOfGuess2).toEqual(2);
   });
 
-  it("should return the numbersOfGuess by numGuesses ", () => {
-    console.log("should add the numbersOfGuess by numGuesses ");
+  it("should return the numbersOfGuess by numberGuesses ", () => {
+    console.log("should add the numbersOfGuess by numberGuesses ");
     const bound = 4;
     const game = gameGenerator(bound);
     const number = [];
@@ -118,7 +118,7 @@ describe("gameGenerator", () => {
       game.guess(i);
       number.push(i);
     }
-    expect(game.numGuesses()).toEqual(number);
+    expect(game.numberGuesses()).toEqual(number);
   });
 
 });

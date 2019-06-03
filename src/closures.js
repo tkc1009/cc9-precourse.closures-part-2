@@ -31,7 +31,7 @@ function gameGenerator(x) {
       numbersOfGuess.push(y);
       return numberOfWin === y;
     },
-    numGuesses: () => {
+    numberGuesses: () => {
       return numbersOfGuess;
     }
   }
