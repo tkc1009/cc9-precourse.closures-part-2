@@ -11,16 +11,21 @@ function randomInteger(n) {
 function gameGenerator(x) {
   const upperBound = x;
   let numberOfWin = randomInteger(upperBound);
+  let numberOfLastWin = 0;
   let numbersOfGuess = [];
-
   return {
     reset: () => {
       numberOfWin = randomInteger(upperBound);
-      let numbersOfGuess = [];
+      numbersOfGuess = [];
     },
     giveUp: () => {
-      reset();
-      return numberOfWin;
+      numberOfLastWin = numberOfWin;
+      // for(let temp = randomInteger(upperBound); temp !== numberOfLastWin; temp = randomInteger(upperBound)){
+      //   numberOfWin = temp;
+      // }
+      numberOfWin = randomInteger(upperBound);
+      numbersOfGuess = [];
+      return numberOfLastWin;
     },
     guess: (y) => {
       numbersOfGuess.push(y);
