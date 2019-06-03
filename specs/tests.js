@@ -110,7 +110,7 @@ describe("gameGenerator", () => {
   });
 
   it("should return the numbersOfGuess by numberGuesses ", () => {
-    console.log("should add the numbersOfGuess by numberGuesses ");
+    console.log("should return the numbersOfGuess by numberGuesses ");
     const bound = 4;
     const game = gameGenerator(bound);
     const number = [];
@@ -129,7 +129,118 @@ describe("accountGenerator", () => {
     expect(typeof accountGenerator).toBe("function");
   });
 
-  it("should have some tests", () => {
-    expect(false).toBeTruthy();
+  it("should have a getBalance method", () => {
+    const initial = 10;
+    const account = accountGenerator(initial);
+    expect(account.getBalance).toBeDefined();
+    expect(typeof account.getBalance).toBe("function");
   });
+
+  it("should have a withdraw method", () => {
+    const initial = 10;
+    const account = accountGenerator(initial);
+    expect(account.withdraw).toBeDefined();
+    expect(typeof account.withdraw).toBe("function");
+  });
+
+  it("should have a deposit method", () => {
+    const initial = 10;
+    const account = accountGenerator(initial);
+    expect(account.deposit).toBeDefined();
+    expect(typeof account.deposit).toBe("function");
+  });
+
+  it("should have a transactionHistory method", () => {
+    const initial = 10;
+    const account = accountGenerator(initial);
+    expect(account.transactionHistory).toBeDefined();
+    expect(typeof account.transactionHistory).toBe("function");
+  });
+
+  it("should have a averageTransaction method", () => {
+    const initial = 10;
+    const account = accountGenerator(initial);
+    expect(account.averageTransaction).toBeDefined();
+    expect(typeof account.averageTransaction).toBe("function");
+  });
+
+  it("should return a current balance by getBalance", () => {
+    const initial = 100;
+    const account = accountGenerator(initial);
+    account.deposit(1000);
+    expect(account.getBalance()).toEqual(1100);
+  });
+
+  it("should return a transaction object by deposit", () => {
+    const initial = 100;
+    const account = accountGenerator(initial);
+    expect(account.deposit(2000)).toEqual({
+      type: "deposit",
+      amount: 2000,
+      before: 100,
+      after: 2100,
+      status: "approved"
+    });
+  });
+
+  it("should return a transaction object by withdraw", () => {
+    const initial = 100;
+    const account = accountGenerator(initial);
+    expect(account.withdraw(100)).toEqual({
+      type: "withdrawal",
+      amount: 100,
+      before: 100,
+      after: 0,
+      status: "approved"
+    });
+  });
+
+  it("should return a denied transaction object by withdraw", () => {
+    const initial = 100;
+    const account = accountGenerator(initial);
+    expect(account.withdraw(2000)).toEqual({
+      type: "withdrawal",
+      amount: 2000,
+      before: 100,
+      after: 100,
+      status: "denied"
+    });
+  });
+
+  it("should return transaction objects of the history by transactionHistory", () => {
+    const initial = 100;
+    const account = accountGenerator(initial);
+    account.deposit(2000);
+    account.withdraw(5000);
+    account.withdraw(1000);
+    expect(account.transactionHistory(2)).toEqual([{
+      type: "withdrawal",
+      amount: 1000,
+      before: 2100,
+      after: 1100,
+      status: "approved"
+    }, {
+      type: "withdrawal",
+      amount: 5000,
+      before: 2100,
+      after: 2100,
+      status: "denied"
+    }]);
+  });
+
+  it("should return an average of deposit and withdrawal by averageTransaction", () => {
+    const initial = 100;
+    const account = accountGenerator(initial);
+    account.deposit(2000);
+    account.withdraw(5000);
+    account.withdraw(1000);
+    account.deposit(2000);
+    account.withdraw(5000);
+    account.withdraw(1000);
+    expect(account.averageTransaction()).toEqual({
+      deposit: 2000,
+      withdrawal: 1000
+    });
+  });
+
 });
