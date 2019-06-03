@@ -32,7 +32,7 @@ function gameGenerator(x) {
       return numberOfWin === y;
     },
     numberGuesses: () => {
-      return numbersOfGuess;
+      return numbersOfGuess.length;
     }
   }
 }

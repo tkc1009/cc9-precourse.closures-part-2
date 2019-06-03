@@ -84,29 +84,29 @@ describe("gameGenerator", () => {
     console.log("should delete the numbersOfGuess by giveUp");
     const bound = 5;
     const game = gameGenerator(bound);
-    let array1;
-    let array2;
+    let number1;
+    let number2;
     for (let i = 0; i <= bound; i++) {
       game.guess(i)
     }
-    array1 = game.numberGuesses();
+    number1 = game.numberGuesses();
     game.giveUp();
-    array2 = game.numberGuesses();
-    expect(array2.length).toBeLessThan(array1.length);
+    number2 = game.numberGuesses();
+    expect(number1).toBeGreaterThan(number2);
   });
 
   it("should add the numbersOfGuess by guess", () => {
     console.log("should add the numbersOfGuess by guess");
     const bound = 5;
     const game = gameGenerator(bound);
-    let lengthOfGuess1;
-    let lengthOfGuess2;
+    let number1;
+    let number2;
     game.guess(1);
-    lengthOfGuess1 = game.numberGuesses().length;
+    number1 = game.numberGuesses();
     game.guess(2);
-    lengthOfGuess2 = game.numberGuesses().length;
-    expect(lengthOfGuess1).toEqual(1);
-    expect(lengthOfGuess2).toEqual(2);
+    number2 = game.numberGuesses();
+    expect(number1).toEqual(1);
+    expect(number2).toEqual(2);
   });
 
   it("should return the numbersOfGuess by numberGuesses ", () => {
@@ -118,7 +118,7 @@ describe("gameGenerator", () => {
       game.guess(i);
       number.push(i);
     }
-    expect(game.numberGuesses()).toEqual(number);
+    expect(game.numberGuesses()).toEqual(number.length);
   });
 
 });
