@@ -84,7 +84,7 @@ function accountGenerator(initial) {
     },
     transactionHistory: function(n){
       const historyForReturn = [];
-      for(i = history.length - 1; 0 <= i; i--){
+      for(let i = history.length - 1; 0 <= i; i--){
         if(0 < n){
           historyForReturn.push(history[i]);
           n--;
@@ -97,7 +97,7 @@ function accountGenerator(initial) {
       let lengthOfDeposit = 0;
       let totalOfWithdrawal = 0;
       let lengthOfWithdrawal = 0;
-      for(i = history.length - 1; 0 <= i; i--){
+      for(let i = history.length - 1; 0 <= i; i--){
         if(history[i].status === "approved"){
           if(history[i].type === "deposit"){
             totalOfDeposit += history[i].amount;
