@@ -169,36 +169,42 @@ describe("accountGenerator", () => {
   it("should return a transaction object by deposit", () => {
     const initial = 100;
     const account = accountGenerator(initial);
-    expect(account.deposit(2000)).toEqual({
+    const target = account.deposit(2000);
+    expect(target).toEqual({
       type: "deposit",
       amount: 2000,
       before: 100,
       after: 2100,
-      status: "approved"
+      status: "approved",
+      time: target.time
     });
   });
 
   it("should return a transaction object by withdraw", () => {
     const initial = 100;
     const account = accountGenerator(initial);
-    expect(account.withdraw(100)).toEqual({
+    const target = account.withdraw(100);
+    expect(target).toEqual({
       type: "withdrawal",
       amount: 100,
       before: 100,
       after: 0,
-      status: "approved"
+      status: "approved",
+      time: target.time
     });
   });
 
   it("should return a denied transaction object by withdraw", () => {
     const initial = 100;
     const account = accountGenerator(initial);
-    expect(account.withdraw(2000)).toEqual({
+    const target = account.withdraw(2000)
+    expect(target).toEqual({
       type: "withdrawal",
       amount: 2000,
       before: 100,
       after: 100,
-      status: "denied"
+      status: "denied",
+      time: target.time
     });
   });
 
@@ -208,18 +214,21 @@ describe("accountGenerator", () => {
     account.deposit(2000);
     account.withdraw(5000);
     account.withdraw(1000);
-    expect(account.transactionHistory(2)).toEqual([{
-      type: "withdrawal",
-      amount: 1000,
-      before: 2100,
-      after: 1100,
-      status: "approved"
-    }, {
+    const target = account.transactionHistory(2);
+    expect(target).toEqual([{
       type: "withdrawal",
       amount: 5000,
       before: 2100,
       after: 2100,
-      status: "denied"
+      status: "denied",
+      time: target[1].time
+    }, {
+      type: "withdrawal",
+      amount: 1000,
+      before: 2100,
+      after: 1100,
+      status: "approved",
+      time: target[0].time
     }]);
   });
 

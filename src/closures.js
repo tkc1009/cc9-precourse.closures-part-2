@@ -87,11 +87,8 @@ function accountGenerator(initial) {
     },
     transactionHistory: function(n){
       const historyForReturn = [];
-      for(let i = history.length - 1; 0 <= i; i--){
-        if(0 < n){
-          historyForReturn.push(history[i]);
-          n--;
-        }
+      for(let i = history.length - n; i < history.length; i++){
+        historyForReturn.push(history[i]);
       }
       return historyForReturn;
     },
@@ -100,7 +97,7 @@ function accountGenerator(initial) {
       let lengthOfDeposit = 0;
       let totalOfWithdrawal = 0;
       let lengthOfWithdrawal = 0;
-      for(let i = history.length - 1; 0 <= i; i--){
+      for(let i = 0; i < history.length; i++){
         if(history[i].status === "approved"){
           if(history[i].type === "deposit"){
             totalOfDeposit += history[i].amount;
