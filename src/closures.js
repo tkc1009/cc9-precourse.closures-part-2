@@ -54,7 +54,8 @@ function accountGenerator(initial) {
           amount: amount,
           before: balanceOflast,
           after: balance,
-          status: "approved"
+          status: "approved",
+          time: new Date()
         };
       } else {
         objectOfTransaction = {
@@ -62,7 +63,8 @@ function accountGenerator(initial) {
           amount: amount,
           before: balance,
           after: balance,
-          status: "denied"
+          status: "denied",
+          time: new Date()
         };
       }
       history.push(objectOfTransaction);
@@ -77,7 +79,8 @@ function accountGenerator(initial) {
         amount: amount,
         before: balanceOflast,
         after: balance,
-        status: "approved"
+        status: "approved",
+        time: new Date()
       };
       history.push(objectOfTransaction);
       return objectOfTransaction;
